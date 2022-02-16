@@ -33,6 +33,8 @@ const AllProductsPage: React.FC<{}> = () => {
                 .includes(searchTerm.toLocaleLowerCase())
             ) {
               return val;
+            } else {
+              return;
             }
           })
           .map((item) => (
