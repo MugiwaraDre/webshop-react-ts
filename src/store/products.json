@@ -1,0 +1,59 @@
+[
+  {
+      "id": 1,
+      "category": [ "Men", "Long Sleeve", "Slim Fit" ],
+      "title": "Ultra Pro Hiking Booots",
+      "description": "blue",
+      "price": 25,
+        "amount": 0,
+        "stock": 10,
+        
+        "image": "https://images.unsplash.com/photo-1520219306100-ec4afeeefe58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2603&q=150"
+  },{
+    "id": 2,
+    "category": [ "woman", "Long Sleeve", "Slim Fit" ],
+    "title": "Cargopants",
+    "description": "camo",
+    "price": 45,
+      "amount": 0,
+      "stock": 10,
+      "image": "https://images.unsplash.com/photo-1596172316425-8808e56f2219?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+},{
+    "id": 3,
+    "category": [ "Men", "Long Sleeve", "Slim Fit" ],
+    "title": "Floating tent",
+    "description": "blue",
+    "price": 200,
+      "amount": 0,
+      "stock": 10,
+      "image": "https://i.pinimg.com/564x/b9/89/9e/b9899ea9458e8e84d30c7703b3c4ee3a.jpg"
+},{
+    "id": 4,
+    "category": [ "Men", "Long Sleeve", "Slim Fit" ],
+    "title": "Backpack",
+    "description": "blue",
+    "price": 66,
+      "amount": 0,
+      "stock": 10,
+      "image": "https://images.unsplash.com/photo-1622260614927-208cfe3f5cfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+},{
+    "id": 5,
+    "category": [ "unisex", "best seller" ],
+    "title": "Gloves",
+    "description": "blue",
+    "price": 33,
+      "amount": 0,
+      "stock": 10,
+      "image": "https://images.unsplash.com/photo-1553695776-6a5b8cb9b171?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+},{
+  "id": 6,
+  "category": [ "Men", "Long Sleeve", "Slim Fit" ],
+  "title": "Portable kitchen",
+  "description": "blue",
+  "price": 33,
+    "amount": 0,
+    "stock": 10,
+    "image": "https://images.unsplash.com/photo-1513682168284-d1128ca19e00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+}
+]
+
