@@ -34,7 +34,7 @@ const AllProductsPage: React.FC<{}> = () => {
             ) {
               return val;
             } else {
-              return;
+              return false;
             }
           })
           .map((item) => (
