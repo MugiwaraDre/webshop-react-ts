@@ -1,7 +1,10 @@
 body {
-  background: linear-gradient(
-    113.26132101258463deg,
-    rgba(218, 218, 218, 1) 4.3203125%,
-    rgba(138, 138, 138, 1) 99.00781249999999%
-  );
+  background-image: url('http://localhost:3000/stacked-peaks-haikei.svg');
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

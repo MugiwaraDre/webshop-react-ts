@@ -1,10 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LocationDisplay } from '../../App';
 import { ProductsContext } from '../../store/products-context';
-import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import {
+  ButtonContainer,
+  InfoText,
+  InputContainer,
+  LoginContainer,
+  StyledButton,
+  StyledInput,
+  Wrapper,
+} from './Login.styles';
 
 export function useAuth() {
   return useContext(ProductsContext);
@@ -14,6 +22,29 @@ const LoginPage = () => {
   let navigate = useNavigate();
   let location = LocationDisplay();
   let auth = useAuth();
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [usernameIsVisited, setUsernameIsVisited] = useState<boolean>(false);
+  const [passwordIsVisited, setPasswordIsVisited] = useState<boolean>(false);
+
+  const [usernameIsValid, usernameMessage] = isValidUsername(username);
+  const [passwordIsValid, passwordMessage] = isValidPassword(password);
+  const formIsValid = usernameIsValid && passwordIsValid;
+
+  const usernameInputCss = !usernameIsVisited
+    ? ''
+    : usernameIsValid
+    ? 'valid'
+    : 'invalid';
+  const passwordInputCss = !passwordIsVisited
+    ? ''
+    : passwordIsValid
+    ? 'valid'
+    : 'invalid';
+  const usernameMessageCss =
+    (usernameIsVisited ? '' : 'invisible') + (usernameIsValid ? '' : ' error');
+  const passwordMessageCss =
+    (passwordIsVisited ? '' : 'invisible') + (passwordIsValid ? '' : ' error');
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,7 +61,7 @@ const LoginPage = () => {
   }
 
   return (
-    <motion.div
+    <Wrapper
       style={{ height: '100vh' }}
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
@@ -39,26 +70,69 @@ const LoginPage = () => {
       {auth.user ? (
         <span>You are logged in.</span>
       ) : (
-        <div>
-          <span>You must log in to view the page at {location}</span>
+        <LoginContainer>
+          <InfoText>You must log in to view the page at {location}</InfoText>
 
           <form onSubmit={handleSubmit}>
-            <label style={{ minWidth: '50vw' }}>
-              Username: <input name='username' type='text' />
-            </label>
-            <br />
-            <label>
-              Password: <input name='password' type='password' />
-            </label>
-            <Button type='submit' className='login-test'>
-              Login
-            </Button>
+            <InputContainer>
+              <label>
+                Username:{' '}
+                <StyledInput
+                  className={usernameInputCss}
+                  name='username'
+                  type='text'
+                  placeholder='enter username with atleast 2 symbols'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  onBlur={() => setUsernameIsVisited(true)}
+                />
+                <p className={usernameMessageCss}> {usernameMessage} </p>
+              </label>
+              <br />
+              <label>
+                Password:{' '}
+                <StyledInput
+                  className={passwordInputCss}
+                  name='password'
+                  type='password'
+                  placeholder='enter password with atleast 4 symbols'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onBlur={() => setPasswordIsVisited(true)}
+                />
+                <p className={passwordMessageCss}> {passwordMessage} </p>
+              </label>
+            </InputContainer>
+            <ButtonContainer>
+              <StyledButton
+                type='submit'
+                className='login-test'
+                disabled={!formIsValid}
+              >
+                Login
+              </StyledButton>
+            </ButtonContainer>{' '}
           </form>
-        </div>
+        </LoginContainer>
       )}
-    </motion.div>
+    </Wrapper>
   );
 };
+
+function isValidUsername(username: string): [boolean, string] {
+  if (username.length >= 2) {
+    return [true, '✅'];
+  } else {
+    return [false, '❌ Please use two letters atleast.'];
+  }
+}
+function isValidPassword(password: string): [boolean, string] {
+  if (password.length >= 4) {
+    return [true, '✅'];
+  } else {
+    return [false, '❌ Please use four letters atleast.'];
+  }
+}
 
 export function Layout() {
   return (
@@ -100,22 +174,22 @@ export function AuthStatus() {
   }
 
   return (
-    <motion.div
+    <Wrapper
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
     >
       <p>
         Welcome {auth.user.username}!<br></br>
-        <button
+        <StyledButton
           onClick={() => {
             auth.signOut(() => navigate('/'));
           }}
         >
           Sign out
-        </button>
+        </StyledButton>
       </p>
-    </motion.div>
+    </Wrapper>
   );
 }
 
