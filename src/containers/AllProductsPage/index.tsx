@@ -12,7 +12,11 @@ const AllProductsPage: React.FC<{}> = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+    >
       <div className='searchbar' datatest-id='test_product_page'>
         <input
           type='text'

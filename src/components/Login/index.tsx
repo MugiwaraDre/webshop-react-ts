@@ -4,6 +4,7 @@ import { LocationDisplay } from '../../App';
 import { ProductsContext } from '../../store/products-context';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export function useAuth() {
   return useContext(ProductsContext);
@@ -29,7 +30,12 @@ const LoginPage = () => {
   }
 
   return (
-    <div style={{ height: '100vh' }}>
+    <motion.div
+      style={{ height: '100vh' }}
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1 }}
+    >
       {auth.user ? (
         <span>You are logged in.</span>
       ) : (
@@ -50,13 +56,17 @@ const LoginPage = () => {
           </form>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
 export function Layout() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1 }}
+    >
       <AuthStatus />
 
       <ul>
@@ -69,7 +79,7 @@ export function Layout() {
       </ul>
 
       <Outlet />
-    </div>
+    </motion.div>
   );
 }
 
@@ -78,20 +88,34 @@ export function AuthStatus() {
   let navigate = useNavigate();
 
   if (!auth.user) {
-    return <p>You are not logged in.</p>;
+    return (
+      <motion.p
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+      >
+        You are not logged in.
+      </motion.p>
+    );
   }
 
   return (
-    <p>
-      Welcome {auth.user.username}!<br></br>
-      <button
-        onClick={() => {
-          auth.signOut(() => navigate('/'));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1 }}
+    >
+      <p>
+        Welcome {auth.user.username}!<br></br>
+        <button
+          onClick={() => {
+            auth.signOut(() => navigate('/'));
+          }}
+        >
+          Sign out
+        </button>
+      </p>
+    </motion.div>
   );
 }
 
@@ -100,10 +124,7 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   let location = useLocation();
 
   if (!auth.user) {
-    // Redirect them to the /login page, but save the current location they were
-    // trying to go to when they were redirected. This allows us to send them
-    // along to that page after they login, which is a nicer user experience
-    // than dropping them off on the home page.
+    // Redirect them to the /login page.
     return <Navigate to='/login' state={{ from: location }} replace />;
   }
 
@@ -113,7 +134,11 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
 export function ProtectedPage() {
   let ctx = useAuth();
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1 }}
+    >
       <div>
         <h3>Your Info:</h3>
         <p>Address: {ctx.user.address}</p>
@@ -124,7 +149,7 @@ export function ProtectedPage() {
           {ctx.cart ? ctx.cart.map((item) => <li>{item.title}</li>) : null}
         </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
