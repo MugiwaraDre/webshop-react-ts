@@ -41,4 +41,25 @@ describe('CartContainer', () => {
       expect(screen.queryByTestId('remove_btn')).not.toBeInTheDocument()
     );
   });
+
+  it('should store cart in localstorage', async () => {
+    const { container } = renderWithRouter(<App />);
+    const leftClick = { button: 0 };
+
+    userEvent.click(container.querySelector('.add_to_cart_btn')!, leftClick);
+    const fetchedCart = JSON.parse(localStorage.getItem('Cart')!);
+    await waitFor(() => expect(fetchedCart).toBeDefined());
+  });
+
+  it('should store cart in localstorage with items when added to cart', async () => {
+    const { container } = renderWithRouter(<App />);
+    const leftClick = { button: 0 };
+
+    userEvent.click(container.querySelector('.add_to_cart_btn')!, leftClick);
+    userEvent.click(container.querySelector('.add_to_cart_btn')!, leftClick);
+    userEvent.click(container.querySelector('.add_to_cart_btn')!, leftClick);
+    const fetchedCart = JSON.parse(localStorage.getItem('Cart')!);
+
+    await waitFor(() => expect(fetchedCart[0].amount).toBe(3));
+  });
 });

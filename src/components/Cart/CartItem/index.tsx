@@ -27,7 +27,6 @@ const CartItem: React.FC<Props> = ({ item, removeFromCart }) => (
           variant='contained'
           onClick={() => {
             removeFromCart(item.id);
-            console.log(item.stock);
           }}
         >
           -

@@ -42,7 +42,7 @@ const AllProductsPage: React.FC<{}> = () => {
             }
           })
           .map((item) => (
-            <Grid item key={item.id} xs={12} sm={4}>
+            <Grid item key={item.id} xs={12} sm={4} data-testid='grid-item'>
               <Item
                 item={item}
                 handleAddToCart={productsCtx.handleAddToCart}

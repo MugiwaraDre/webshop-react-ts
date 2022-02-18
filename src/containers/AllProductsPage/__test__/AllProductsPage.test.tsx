@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import AllProductsPage from '../index';
@@ -21,6 +21,13 @@ describe('AllProductsPage container', () => {
     ).toBeInTheDocument();
   });
 
+  it('should render correct ammount of products', () => {
+    renderWithRouter(<App />, {
+      route: '/allproducts',
+    });
+    const products = screen.getAllByTestId('grid-item');
+    expect(products.length).toBe(6);
+  });
   it('should return correct value ffrom searchfield', () => {
     render(<AllProductsPage />);
     const searchInput = screen.getByPlaceholderText('search for an item...');
@@ -39,6 +46,28 @@ describe('AllProductsPage container', () => {
     const elem = screen.getAllByTestId('grid');
 
     expect(elem.length).toBe(1);
+  });
+
+  it('should render correct ammount of products after search', () => {
+    renderWithRouter(<App />, {
+      route: '/allproducts',
+    });
+    const searchInput = screen.getByPlaceholderText('search for an item...');
+
+    userEvent.type(searchInput, 'Ultra');
+    const products = screen.getAllByTestId('grid-item');
+    expect(products.length).toBe(1);
+  });
+
+  it('should render correct ammount of products after search', () => {
+    renderWithRouter(<App />, {
+      route: '/allproducts',
+    });
+    const searchInput = screen.getByPlaceholderText('search for an item...');
+
+    userEvent.type(searchInput, 'b');
+    const products = screen.getAllByTestId('grid-item');
+    expect(products.length).toBe(3);
   });
 
   it('landing on a bad page', () => {
