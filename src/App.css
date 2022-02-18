@@ -1,9 +1,6 @@
 body {
-  background-image: url('http://localhost:3000/stacked-peaks-haikei.svg');
-  /* Full height */
+  background-image: url('https://hike-r-us.herokuapp.com/stacked-peaks-haikei.svg');
   height: 100%;
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
